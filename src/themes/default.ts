@@ -1,8 +1,8 @@
 export default {
   // Alert
   alert: {
-    base: 'p-4 pl-12 relative rounded-lg leading-5',
-    withClose: 'pr-12',
+    base: 'p-4 ps-12 relative rounded-lg leading-5',
+    withClose: 'pe-12',
     success: 'bg-green-50 text-green-900 dark:bg-green-600 dark:text-white',
     danger: 'bg-red-50 text-red-900 dark:bg-red-600 dark:text-white',
     warning: 'bg-yellow-50 text-yellow-900 dark:bg-yellow-600 dark:text-white',
@@ -33,7 +33,7 @@ export default {
   // TableHeader
   tableHeader: {
     base:
-      'text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800',
+      'text-xs font-semibold tracking-wide text-start text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800',
   },
   // TableContainer
   tableContainer: {
@@ -59,8 +59,8 @@ export default {
     base:
       'absolute w-56 p-2 mt-2 text-gray-600 bg-white border border-gray-100 rounded-lg shadow-md min-w-max-content dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700',
     align: {
-      left: 'left-0',
-      right: 'right-0',
+      start: 'start-0',
+      end: 'end-0',
     },
   },
   // Avatar
@@ -84,7 +84,7 @@ export default {
   // ModalFooter
   modalFooter: {
     base:
-      'flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800',
+      'flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-s-6 sm:flex-row bg-gray-50 dark:bg-gray-800',
   },
   // ModalHeader
   modalHeader: {
@@ -187,8 +187,8 @@ export default {
       large: 'h-5 w-5',
       regular: 'h-5 w-5',
       small: 'h-3 w-3',
-      left: 'mr-2 -ml-1',
-      right: 'ml-2 -mr-1',
+      left: 'me-2 -ms-1',
+      right: 'ms-2 -me-1',
     },
     primary: {
       base: 'text-white bg-purple-600 border border-transparent',

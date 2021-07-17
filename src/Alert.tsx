@@ -128,13 +128,13 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props,
 
   const cls = classNames(baseStyle, typeStyle, onClose && withCloseStyle, className)
 
-  const iconCls = classNames(iconBaseStyle, iconTypeStyle, 'absolute left-0 top-0 ml-4 mt-4')
+  const iconCls = classNames(iconBaseStyle, iconTypeStyle, 'absolute start-0 top-0 ms-4 mt-4')
   const closeCls = classNames(iconBaseStyle, iconTypeStyle)
 
   return (
     <div className={cls} role="alert" ref={ref} {...other}>
       {onClose && (
-        <button onClick={onClose} className="absolute top-0 right-0 mt-4 mr-4" aria-label="close">
+        <button onClick={onClose} className="absolute top-0 end-0 mt-4 me-4" aria-label="close">
           <svg
             className={closeCls}
             fill="currentColor"

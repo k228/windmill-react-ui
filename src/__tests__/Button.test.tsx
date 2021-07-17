@@ -91,14 +91,14 @@ describe('Base Button', () => {
   })
 
   it('should extend classes', () => {
-    const expected = 'ml-2'
-    const wrapper = mount(<Button aria-label="test" className="ml-2" />)
+    const expected = 'ms-2'
+    const wrapper = mount(<Button aria-label="test" className="ms-2" />)
 
     expect(wrapper.find('button').getDOMNode().getAttribute('class')).toContain(expected)
   })
 
   // it('should warn', () => {
-  //   const expected = 'ml-2'
+  //   const expected = 'ms-2'
   //   const wrapper = mount(<Button size="icon" />)
 
   //   expect(wrapper.find('button').getDOMNode().getAttribute('class')).toContain(expected)
@@ -273,21 +273,21 @@ describe('Icon', () => {
   })
 
   it('should not contain left or right styles', () => {
-    const expected = 'mr-2 -ml-1 ml-2 -mr-1'
+    const expected = 'me-2 -ms-1 ms-2 -me-1'
     const wrapper = mount(<Button aria-label="test" icon={HeartIcon} />)
 
     expect(wrapper.find('svg').getDOMNode().getAttribute('class')).not.toContain(expected)
   })
 
   it('should render an icon with left styles', () => {
-    const expected = 'mr-2 -ml-1'
+    const expected = 'me-2 -ms-1'
     const wrapper = mount(<Button iconLeft={HeartIcon}>Lorem</Button>)
 
     expect(wrapper.find('svg').getDOMNode().getAttribute('class')).toContain(expected)
   })
 
   it('should render an icon with right styles', () => {
-    const expected = 'ml-2 -mr-1'
+    const expected = 'ms-2 -me-1'
     const wrapper = mount(<Button iconRight={HeartIcon}>Lorem</Button>)
 
     expect(wrapper.find('svg').getDOMNode().getAttribute('class')).toContain(expected)

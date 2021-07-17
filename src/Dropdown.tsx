@@ -16,11 +16,11 @@ export interface DropdownProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
    * Defines the alignement of the dropdown related to its parent
    */
-  align?: 'left' | 'right'
+  align?: 'start' | 'end'
 }
 
 const Dropdown = React.forwardRef<HTMLDivElement, DropdownProps>(function Dropdown(props, ref) {
-  const { children, onClose, isOpen, className, align = 'left', ...other } = props
+  const { children, onClose, isOpen, className, align = 'start', ...other } = props
   const {
     theme: { dropdown },
   } = useContext(ThemeContext)
