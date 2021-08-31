@@ -33,7 +33,8 @@ export interface PaginationProps {
      * The function executed on page change
      */
     onChange: (activePage: number) => void;
+    activePage: number;
 }
-declare const Pagination: React.ForwardRefExoticComponent<PaginationProps & React.RefAttributes<HTMLDivElement>>;
+declare const Pagination: ({ totalResults, resultsPerPage, label, onChange, activePage, ...other }: PaginationProps) => JSX.Element;
 export default Pagination;
 //# sourceMappingURL=Pagination.d.ts.map
