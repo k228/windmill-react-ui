@@ -93,26 +93,29 @@ export interface PaginationProps {
    * The function executed on page change
    */
   onChange: (activePage: number) => void
+
+  activePage:number
 }
 
 type Ref = HTMLDivElement
 
-const Pagination = React.forwardRef<Ref, PaginationProps>(function Pagination(props, ref) {
-  const { totalResults, resultsPerPage = 10, label, onChange, ...other } = props
+const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange,activePage, ...other }:PaginationProps)=> {
+  // const { totalResults, resultsPerPage = 10, label, onChange, ...other } = props
   const [pages, setPages] = useState<(number | string)[]>([])
-  const [activePage, setActivePage] = useState(1)
+  // const [activePage, setActivePage] = useState(1)
 
   const TOTAL_PAGES = Math.ceil(totalResults / resultsPerPage)
   const FIRST_PAGE = 1
   const LAST_PAGE = TOTAL_PAGES
   const MAX_VISIBLE_PAGES = 7
 
-  function handlePreviousClick() {
-    setActivePage(activePage - 1)
+  const handlePreviousClick=()=> {
+    
+    onChange(activePage - 1)
   }
 
-  function handleNextClick() {
-    setActivePage(activePage + 1)
+  const handleNextClick=() =>{
+    onChange(activePage + 1)
   }
 
   useEffect(() => {
@@ -153,9 +156,9 @@ const Pagination = React.forwardRef<Ref, PaginationProps>(function Pagination(pr
     }
   }, [activePage, TOTAL_PAGES])
 
-  useEffect(() => {
-    onChange(activePage)
-  }, [activePage])
+  // useEffect(() => {
+  //   onChange(activePage)
+  // }, [activePage])
 
   const {
     theme: { pagination },
@@ -164,7 +167,7 @@ const Pagination = React.forwardRef<Ref, PaginationProps>(function Pagination(pr
   const baseStyle = pagination.base
 
   return (
-    <div className={baseStyle} ref={ref} {...other}>
+    <div className={baseStyle}  {...other}>
       {/*
        * This (label) should probably be an option, and not the default
        */}
@@ -191,7 +194,7 @@ const Pagination = React.forwardRef<Ref, PaginationProps>(function Pagination(pr
                   <PageButton
                     page={p}
                     isActive={p === activePage}
-                    onClick={() => setActivePage(+p)}
+                    onClick={() => onChange(+p)}
                   />
                 )}
               </li>
@@ -208,6 +211,6 @@ const Pagination = React.forwardRef<Ref, PaginationProps>(function Pagination(pr
       </div>
     </div>
   )
-})
+}
 
 export default Pagination
