@@ -42,7 +42,7 @@ export const NavigationButton: React.FC<NavigationButtonProps> = function Naviga
   return (
     <Button
       size="small"
-      layout="link"
+      layout="outline"
       icon={icon}
       onClick={onClick}
       disabled={disabled}
