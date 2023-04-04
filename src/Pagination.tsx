@@ -60,20 +60,16 @@ interface PageButtonProps extends ButtonAsButtonProps {
    * Defines if the button is active
    */
   isActive?: boolean
-  /**
-  * Defines  layout type of deactive  button
-  */
-  deactiveLayout?: 'outline' | 'link'
+
 }
 
 export const PageButton: React.FC<PageButtonProps> = function PageButton({
   page,
   isActive,
   onClick,
-  deactiveLayout
 }) {
   return (
-    <Button size="pagination" layout={isActive ? 'primary' : (deactiveLayout ? deactiveLayout : 'link')} onClick={onClick}>
+    <Button size="pagination" layout={isActive ? 'primary' :  'outline'} onClick={onClick}>
       {page}
     </Button>
   )
@@ -116,8 +112,8 @@ const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange, active
   const LAST_PAGE = TOTAL_PAGES
   const MAX_VISIBLE_PAGES = 7
 
-  const handlePreviousClick = () => {
-
+  const handlePreviousClick=()=> {
+    
     onChange(activePage - 1)
   }
 
