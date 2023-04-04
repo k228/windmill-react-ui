@@ -60,15 +60,20 @@ interface PageButtonProps extends ButtonAsButtonProps {
    * Defines if the button is active
    */
   isActive?: boolean
+  /**
+  * Defines  layout type of deactive  button
+  */
+  deactiveLayout?: 'outline' | 'link'
 }
 
 export const PageButton: React.FC<PageButtonProps> = function PageButton({
   page,
   isActive,
   onClick,
+  deactiveLayout
 }) {
   return (
-    <Button size="pagination" layout={isActive ? 'primary' : 'link'} onClick={onClick}>
+    <Button size="pagination" layout={isActive ? 'primary' : (deactiveLayout ? deactiveLayout : 'link')} onClick={onClick}>
       {page}
     </Button>
   )
@@ -94,12 +99,14 @@ export interface PaginationProps {
    */
   onChange: (activePage: number) => void
 
-  activePage:number
+  activePage: number
+
+  summaryStatus?: boolean
 }
 
 type Ref = HTMLDivElement
 
-const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange,activePage, ...other }:PaginationProps)=> {
+const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange, activePage, summaryStatus, ...other }: PaginationProps) => {
   // const { totalResults, resultsPerPage = 10, label, onChange, ...other } = props
   const [pages, setPages] = useState<(number | string)[]>([])
   // const [activePage, setActivePage] = useState(1)
@@ -109,8 +116,8 @@ const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange,activeP
   const LAST_PAGE = TOTAL_PAGES
   const MAX_VISIBLE_PAGES = 7
 
-  const handlePreviousClick=()=> {
-    
+  const handlePreviousClick = () => {
+
     onChange(activePage - 1)
   }
 
@@ -171,10 +178,10 @@ const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange,activeP
       {/*
        * This (label) should probably be an option, and not the default
        */}
-      <span className="flex items-center font-semibold tracking-wide uppercase">
+      {summaryStatus && <span className="flex items-center font-semibold tracking-wide uppercase">
         Showing {activePage * resultsPerPage - resultsPerPage + 1}-
         {Math.min(activePage * resultsPerPage, totalResults)} of {totalResults}
-      </span>
+      </span>}
 
       <div className="flex mt-2 sm:mt-auto sm:justify-end">
         <nav aria-label={label}>
