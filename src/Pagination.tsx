@@ -184,7 +184,7 @@ const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange, active
       <div className="flex mt-2 sm:mt-auto sm:justify-end">
         <nav aria-label={label}>
           <ul className={`${direction=='rtl'?"inline-flex items-center flex-row-reverse":"inline-flex items-center"}`}>
-            <li className={`${direction=='rtl'?"rotate-180":""}`}>
+            <li className={`${direction=='rtl'?"rotate-180 transform":""}`}>
               <NavigationButton
                 directionIcon="prev"
                 disabled={activePage === FIRST_PAGE}
@@ -204,7 +204,7 @@ const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange, active
                 )}
               </li>
             ))}
-            <li className={`${direction=='rtl'?"rotate-180":""}`}>
+            <li className={`${direction=='rtl'?"rotate-180 transform":""}`}>
               <NavigationButton
                 directionIcon="next"
                 disabled={activePage === LAST_PAGE}
