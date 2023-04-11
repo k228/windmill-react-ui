@@ -98,11 +98,13 @@ export interface PaginationProps {
   activePage: number
 
   summaryStatus?: boolean
+
+  direction?:'rtl' | 'ltr'
 }
 
 type Ref = HTMLDivElement
 
-const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange, activePage, summaryStatus, ...other }: PaginationProps) => {
+const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange, activePage, summaryStatus, direction, ...other }: PaginationProps) => {
   // const { totalResults, resultsPerPage = 10, label, onChange, ...other } = props
   const [pages, setPages] = useState<(number | string)[]>([])
   // const [activePage, setActivePage] = useState(1)
@@ -181,8 +183,8 @@ const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange, active
 
       <div className="flex mt-2 sm:mt-auto sm:justify-end">
         <nav aria-label={label}>
-          <ul className="inline-flex items-center">
-            <li>
+          <ul className={`${direction=='rtl'?"inline-flex items-center flex-row-reverse":"inline-flex items-center"}`}>
+            <li className={`${direction=='rtl'?"rotate-180":""}`}>
               <NavigationButton
                 directionIcon="prev"
                 disabled={activePage === FIRST_PAGE}
@@ -202,7 +204,7 @@ const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange, active
                 )}
               </li>
             ))}
-            <li>
+            <li className={`${direction=='rtl'?"rotate-180":""}`}>
               <NavigationButton
                 directionIcon="next"
                 disabled={activePage === LAST_PAGE}
