@@ -224,7 +224,7 @@ const Pagination = ({ goto = true, totalResults, resultsPerPage = 10, label, onC
       </div>
       {goto && <div className={gotoStyle}>
         <Label>
-          {gotoText} :
+          {gotoText} 
         </Label>
         <Input type="number" style={{ width: 60, height: 30 }} className='mx-2' onChange={(e) => {
           const { target } = e;
