@@ -103,12 +103,12 @@ export interface PaginationProps {
 
   direction?: 'rtl' | 'ltr'
 
-  goto?: string
+  goto?: boolean
 }
 
 type Ref = HTMLDivElement
 
-const Pagination = ({ goto = "go to", totalResults, resultsPerPage = 10, label, onChange, activePage, summaryStatus, direction, ...other }: PaginationProps) => {
+const Pagination = ({ goto = true, totalResults, resultsPerPage = 10, label, onChange, activePage, summaryStatus, direction, ...other }: PaginationProps) => {
   // const { totalResults, resultsPerPage = 10, label, onChange, ...other } = props
   const [pages, setPages] = useState<(number | string)[]>([])
   // const [activePage, setActivePage] = useState(1)
@@ -118,7 +118,7 @@ const Pagination = ({ goto = "go to", totalResults, resultsPerPage = 10, label, 
   const LAST_PAGE = TOTAL_PAGES
   const MAX_VISIBLE_PAGES = 7
 
-  const [debounce, setDebounce] = useState<NodeJS.Timeout|undefined>();
+  const [debounce, setDebounce] = useState<NodeJS.Timeout | undefined>();
 
   const handlePreviousClick = () => {
 
@@ -177,27 +177,13 @@ const Pagination = ({ goto = "go to", totalResults, resultsPerPage = 10, label, 
 
   const baseStyle = pagination.base
   const gotoStyle = pagination.goto
+  const gotoText = pagination.gotoText
 
   return (
     <div className={baseStyle}  {...other}>
       {/*
        * This (label) should probably be an option, and not the default
        */}
-      {goto && <div className={gotoStyle}> 
-        <Label>
-          {goto} : 
-        </Label>
-        <Input type="number"  style={{width:60,height:30}} className='mx-2' onChange={(e)=>{
-          if(debounce){
-            clearTimeout(debounce)
-          }
-          let t=setTimeout(()=>{
-            onChange(+e?.target.value)
-            e.target.value=""
-          },500)
-          setDebounce(t)
-        }} />
-      </div>}
       {summaryStatus && <span className="flex items-center font-semibold tracking-wide uppercase">
         Showing {activePage * resultsPerPage - resultsPerPage + 1}-
         {Math.min(activePage * resultsPerPage, totalResults)} of {totalResults}
@@ -236,6 +222,22 @@ const Pagination = ({ goto = "go to", totalResults, resultsPerPage = 10, label, 
           </ul>
         </nav>
       </div>
+      {goto && <div className={gotoStyle}>
+        <Label>
+          {gotoText} :
+        </Label>
+        <Input type="number" style={{ width: 60, height: 30 }} className='mx-2' onChange={(e) => {
+          const { target } = e;
+          if (debounce) {
+            clearTimeout(debounce)
+          }
+          let t = setTimeout(() => {
+            onChange(+target.value)
+            target.value = ""
+          }, 500)
+          setDebounce(t)
+        }} />
+      </div>}
     </div>
   )
 }
