@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Button, { ButtonAsButtonProps } from './Button'
 import { ThemeContext } from './context/ThemeContext'
+import Input from './Input'
+import Label from './Label'
 
 const PrevIcon: React.FC = function PrevIcon(props) {
   return (
@@ -69,7 +71,7 @@ export const PageButton: React.FC<PageButtonProps> = function PageButton({
   onClick,
 }) {
   return (
-    <Button size="pagination" layout={isActive ? 'primary' :  'outline'} onClick={onClick}>
+    <Button size="pagination" layout={isActive ? 'primary' : 'outline'} onClick={onClick}>
       {page}
     </Button>
   )
@@ -99,12 +101,14 @@ export interface PaginationProps {
 
   summaryStatus?: boolean
 
-  direction?:'rtl' | 'ltr'
+  direction?: 'rtl' | 'ltr'
+
+  goto?: string
 }
 
 type Ref = HTMLDivElement
 
-const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange, activePage, summaryStatus, direction, ...other }: PaginationProps) => {
+const Pagination = ({ goto = "go to", totalResults, resultsPerPage = 10, label, onChange, activePage, summaryStatus, direction, ...other }: PaginationProps) => {
   // const { totalResults, resultsPerPage = 10, label, onChange, ...other } = props
   const [pages, setPages] = useState<(number | string)[]>([])
   // const [activePage, setActivePage] = useState(1)
@@ -114,12 +118,14 @@ const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange, active
   const LAST_PAGE = TOTAL_PAGES
   const MAX_VISIBLE_PAGES = 7
 
-  const handlePreviousClick=()=> {
-    
+  const [debounce, setDebounce] = useState<NodeJS.Timeout|undefined>();
+
+  const handlePreviousClick = () => {
+
     onChange(activePage - 1)
   }
 
-  const handleNextClick=() =>{
+  const handleNextClick = () => {
     onChange(activePage + 1)
   }
 
@@ -170,12 +176,28 @@ const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange, active
   } = useContext(ThemeContext)
 
   const baseStyle = pagination.base
+  const gotoStyle = pagination.goto
 
   return (
     <div className={baseStyle}  {...other}>
       {/*
        * This (label) should probably be an option, and not the default
        */}
+      {goto && <div className={gotoStyle}> 
+        <Label>
+          {goto} : 
+        </Label>
+        <Input type="number"  style={{width:60,height:30}} className='mx-2' onChange={(e)=>{
+          if(debounce){
+            clearTimeout(debounce)
+          }
+          let t=setTimeout(()=>{
+            onChange(+e?.target.value)
+            e.target.value=""
+          },500)
+          setDebounce(t)
+        }} />
+      </div>}
       {summaryStatus && <span className="flex items-center font-semibold tracking-wide uppercase">
         Showing {activePage * resultsPerPage - resultsPerPage + 1}-
         {Math.min(activePage * resultsPerPage, totalResults)} of {totalResults}
@@ -183,8 +205,8 @@ const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange, active
 
       <div className="flex mt-2 sm:mt-auto sm:justify-end">
         <nav aria-label={label}>
-          <ul className={`${direction=='rtl'?"inline-flex items-center flex-row-reverse":"inline-flex items-center"}`}>
-            <li className={`${direction=='rtl'?"rotate-180 transform":""}`}>
+          <ul className={`${direction == 'rtl' ? "inline-flex items-center flex-row-reverse" : "inline-flex items-center"}`}>
+            <li className={`${direction == 'rtl' ? "rotate-180 transform" : ""}`}>
               <NavigationButton
                 directionIcon="prev"
                 disabled={activePage === FIRST_PAGE}
@@ -204,7 +226,7 @@ const Pagination = ({ totalResults, resultsPerPage = 10, label, onChange, active
                 )}
               </li>
             ))}
-            <li className={`${direction=='rtl'?"rotate-180 transform":""}`}>
+            <li className={`${direction == 'rtl' ? "rotate-180 transform" : ""}`}>
               <NavigationButton
                 directionIcon="next"
                 disabled={activePage === LAST_PAGE}
