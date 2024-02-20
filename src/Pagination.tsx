@@ -226,10 +226,14 @@ const Pagination = ({ goto = true, totalResults, resultsPerPage = 10, label, onC
         <Label>
           {gotoText} 
         </Label>
-        <Input type="number" style={{ width: 60, height: 30 }} className='mx-2' onChange={(e) => {
+        <Input type="number" style={{ width: 100, height: 30 }} className='mx-2' onChange={(e) => {
           const { target } = e;
           if (debounce) {
             clearTimeout(debounce)
+          }
+
+          if(+target.value>LAST_PAGE){
+            target.value = ""
           }
           let t = setTimeout(() => {
             onChange(+target.value)
