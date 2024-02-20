@@ -18,7 +18,7 @@ declare const _default: {
     };
     pagination: {
         base: string;
-        goto: string
+        goto: string;
     };
     tableFooter: {
         base: string;
