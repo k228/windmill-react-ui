@@ -20,6 +20,7 @@ declare const _default: {
         base: string;
         goto: string;
         gotoText: string;
+        gotoDebounce: string;
     };
     tableFooter: {
         base: string;

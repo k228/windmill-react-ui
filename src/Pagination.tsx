@@ -178,6 +178,7 @@ const Pagination = ({ goto = true, totalResults, resultsPerPage = 10, label, onC
   const baseStyle = pagination.base
   const gotoStyle = pagination.goto
   const gotoText = pagination.gotoText
+  const gotoDebounce = +pagination.gotoDebounce
 
   return (
     <div className={baseStyle}  {...other}>
@@ -238,7 +239,7 @@ const Pagination = ({ goto = true, totalResults, resultsPerPage = 10, label, onC
           let t = setTimeout(() => {
             onChange(+target.value)
             target.value = ""
-          }, 500)
+          }, gotoDebounce)
           setDebounce(t)
         }} />
       </div>}

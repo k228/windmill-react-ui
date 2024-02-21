@@ -22,6 +22,7 @@ export default {
     base: 'flex flex-col  justify-end text-xs sm:flex-row text-gray-600 dark:text-gray-400',
     goto:'flex justify-items-center items-center mx-5',
     gotoText:"go to",
+    gotoDebounce:"1000"
   },
   // TableFooter
   tableFooter: {
