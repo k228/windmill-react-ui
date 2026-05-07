@@ -104,11 +104,13 @@ export interface PaginationProps {
   direction?: 'rtl' | 'ltr'
 
   goto?: boolean
+
+  gotoText?:string
 }
 
 type Ref = HTMLDivElement
 
-const Pagination = ({ goto = true, totalResults, resultsPerPage = 10, label, onChange, activePage, summaryStatus, direction, ...other }: PaginationProps) => {
+const Pagination = ({ goto = true, totalResults, resultsPerPage = 10, label, onChange, activePage, summaryStatus, direction, gotoText, ...other }: PaginationProps) => {
   // const { totalResults, resultsPerPage = 10, label, onChange, ...other } = props
   const [pages, setPages] = useState<(number | string)[]>([])
   // const [activePage, setActivePage] = useState(1)
@@ -177,7 +179,6 @@ const Pagination = ({ goto = true, totalResults, resultsPerPage = 10, label, onC
 
   const baseStyle = pagination.base
   const gotoStyle = pagination.goto
-  const gotoText = pagination.gotoText
   const gotoDebounce = +pagination.gotoDebounce
 
   return (
