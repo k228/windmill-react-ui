@@ -37,7 +37,8 @@ export interface PaginationProps {
     summaryStatus?: boolean;
     direction?: 'rtl' | 'ltr';
     goto?: boolean;
+    gotoText?: string;
 }
-declare const Pagination: ({ goto, totalResults, resultsPerPage, label, onChange, activePage, summaryStatus, direction, ...other }: PaginationProps) => JSX.Element;
+declare const Pagination: ({ goto, totalResults, resultsPerPage, label, onChange, activePage, summaryStatus, direction, gotoText, ...other }: PaginationProps) => JSX.Element;
 export default Pagination;
 //# sourceMappingURL=Pagination.d.ts.map
